@@ -105,15 +105,14 @@
             type: "POST",
             url: "http://localhost:8080/post",
             dataType: "json",
-            data: {
-                title: title,
-                body: body
-            },
+            contentType: "application/json",
+            data: '{"title" : "'+title+'", "body" : "'+body+'" }',
             success: function(response) {
                 console.log(response)
             },
         }).fail(function(response) {
             var data = response.responseJSON;
+            console.log(response)
             var stringfied = JSON.stringify(data)
             var result = JSON.parse(stringfied);
             $('#error').html(result['error'])
