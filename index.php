@@ -59,6 +59,20 @@
 
     //Show Add Form
     $(document).on('click', '#btnGetCreateForm', function(){
+        $.ajax({
+            type: "GET",
+            url: "CreatePost.php",
+            success: function(response){
+                $('#root').html(response);
+            },
+            error: function(error){
+                console.log("error: " + error)
+            }
+        })
+    })
+
+    //Show Table
+    $(document).on('click', '#btnBack', function(){
         
     })
 </script>

@@ -1,5 +1,5 @@
-<button id="btnBack" type="button" class="btn btn-secondary">Back</button>
-<form>
+<button id="btnBack" type="button" class="btn btn-secondary">Back to List</button>
+<form style="margin-top:10px !important">
     <div class="form-group">
         <label for="Title">Title</label>
         <input type="text" class="form-control" id="Title" placeholder="Enter Title">
