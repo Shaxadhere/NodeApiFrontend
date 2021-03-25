@@ -28,6 +28,7 @@
         "<th>SNo</th>" +
         "<th>Title</th>" +
         "<th>Body</th>" +
+        "<th>Actions</th>" +
         "</tr>" +
         "</thead>" +
         "<tbody id='table-body'>" +
@@ -46,7 +47,15 @@
                 var posts = result['posts'];
                 var Sno = 1;
                 posts.forEach(value => {
-                    var RowTemplate = "<tr><td>" + Sno + "</td><td>" + value['title'] + "</td><td>" + value['body'] + "</td></tr>";
+                    var RowTemplate = "<tr>"+
+                    "<td>" + Sno + "</td>"+
+                    "<td>" + value['title'] + "</td>"+
+                    "<td>" + value['body'] + "</td>"+
+                    "<td>"+
+                    "<button class='btn btn-link'>Edit</button>"+
+                    "<button class='btn btn-link text-danger'>Delete</button>"+
+                    "</td>"+
+                    "</tr>";
                     $('#table-body').append(RowTemplate)
                     Sno++;
                 });
@@ -106,7 +115,7 @@
             url: "http://localhost:8080/post",
             dataType: "json",
             contentType: "application/json",
-            data: '{"title" : "'+title+'", "body" : "'+body+'" }',
+            data: '{"title" : "' + title + '", "body" : "' + body + '" }',
             success: function(response) {
                 console.log(response)
             },
