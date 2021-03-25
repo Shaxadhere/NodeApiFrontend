@@ -16,6 +16,27 @@
     </div>
 </body>
 
+<!--   Delete Modal   -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete <strong id="modal-title"></strong>?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-footer">
+                    <input type="hidden" id="modal-id" value="" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" id="confirm" class="btn btn-danger" data-dismiss="modal">Yes, Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -53,7 +74,7 @@
                     "<td>" + value['body'] + "</td>"+
                     "<td>"+
                     "<button class='btn btn-link EditPost'>Edit</button>"+
-                    "<button data-id='"+value['_id']+"' class='btn btn-link text-danger DeletePost'>Delete</button>"+
+                    "<button data-id='"+value['_id']+"' data-title='"+value['title']+"' class='btn btn-link text-danger DeletePost' data-toggle='modal' data-target='.bd-example-modal-sm'>Delete</button>"+
                     "</td>"+
                     "</tr>";
                     $('#table-body').append(RowTemplate)
@@ -134,6 +155,17 @@
             var result = JSON.parse(stringfied);
             $('#error').html(result['error'])
         });
+    })
+
+    //Show Delete Modal
+    $('.modal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+
+        var id = button.data('id');
+        var title = button.data('title');
+        console.log(title)
+        $('#modal-id').val(id);
+        $('#modal-title').html(title);
     })
 </script>
 
