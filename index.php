@@ -112,15 +112,11 @@
             success: function(response) {
                 console.log(response)
             },
-            // error: function(error) {
-            //     console.log("error: " + error)
-            // }
         }).fail(function(response) {
             var data = response.responseJSON;
             var stringfied = JSON.stringify(data)
             var result = JSON.parse(stringfied);
-            $('#error').html(result[0])
-            console.log(result);
+            $('#error').html(result['error'])
         });
     })
 </script>
