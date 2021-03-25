@@ -13,19 +13,6 @@
 
     <div class="container-fluid">
         <div id="root" class="container" style="margin-top:80px !important">
-            <button id="btnGetCreateForm" type="button" class="btn btn-primary">Create Post</button>
-            <table class="table" style="margin-top:10px !important">
-                <thead>
-                    <tr>
-                        <th>SNo</th>
-                        <th>Title</th>
-                        <th>Body</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                    
-                </tbody>
-            </table>
         </div>
     </div>
 </body>
@@ -34,8 +21,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+    var EmptyTable = "<button id='btnGetCreateForm' type='button' class='btn btn-primary'>Create Post</button>"+
+    "<table class='table' style='margin-top:10px !important'>"+
+    "<thead>"+
+    "<tr>"+
+    "<th>SNo</th>"+
+    "<th>Title</th>"+
+    "<th>Body</th>"+
+    "</tr>"+
+    "</thead>"+
+    "<tbody id='table-body'>"+
+    "</tbody>"+
+    "</table>";
+
     //Get List
     $(document).ready(function() {
+        $('#root').html(EmptyTable);
         $.ajax({
             type: "GET",
             url: "http://localhost:8080",
@@ -73,7 +74,26 @@
 
     //Show Table
     $(document).on('click', '#btnBack', function(){
-        
+        $('#root').html(EmptyTable);
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080",
+            success: function(response) {
+                var stringfied = JSON.stringify(response)
+                var result = JSON.parse(stringfied);
+                var posts = result['posts'];
+                var Sno = 1;
+                posts.forEach(value => {
+                    var RowTemplate = "<tr><td>"+Sno+"</td><td>"+value['title']+"</td><td>"+value['body']+"</td></tr>";
+                    $('#table-body').append(RowTemplate)
+                    Sno++;
+                });
+                
+            },
+            error: function(error) {
+                console.log("error: " + error)
+            }
+        })
     })
 </script>
 
