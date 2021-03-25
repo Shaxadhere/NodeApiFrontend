@@ -52,8 +52,8 @@
                     "<td>" + value['title'] + "</td>"+
                     "<td>" + value['body'] + "</td>"+
                     "<td>"+
-                    "<button class='btn btn-link'>Edit</button>"+
-                    "<button class='btn btn-link text-danger'>Delete</button>"+
+                    "<button class='btn btn-link EditPost'>Edit</button>"+
+                    "<button data-id='"+value['_id']+"' class='btn btn-link text-danger DeletePost'>Delete</button>"+
                     "</td>"+
                     "</tr>";
                     $('#table-body').append(RowTemplate)
@@ -93,7 +93,15 @@
                 var posts = result['posts'];
                 var Sno = 1;
                 posts.forEach(value => {
-                    var RowTemplate = "<tr><td>" + Sno + "</td><td>" + value['title'] + "</td><td>" + value['body'] + "</td></tr>";
+                    var RowTemplate = "<tr>"+
+                    "<td>" + Sno + "</td>"+
+                    "<td>" + value['title'] + "</td>"+
+                    "<td>" + value['body'] + "</td>"+
+                    "<td>"+
+                    "<button class='btn btn-link EditPost'>Edit</button>"+
+                    "<button class='btn btn-link text-danger DeletePost'>Delete</button>"+
+                    "</td>"+
+                    "</tr>";
                     $('#table-body').append(RowTemplate)
                     Sno++;
                 });
