@@ -117,9 +117,10 @@
             // }
         }).fail(function(response) {
             var data = response.responseJSON;
-            var result = JSON.parse(data);
-            
-            console.log(data);
+            var stringfied = JSON.stringify(data)
+            var result = JSON.parse(stringfied);
+            $('#error').html(result[0])
+            console.log(result);
         });
     })
 </script>
