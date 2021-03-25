@@ -10,5 +10,5 @@
         <input type="text" class="form-control" id="Body" placeholder="Enter Body">
         <small id="BodyHelp" class="form-text text-muted">Please enter body of your post.</small>
     </div>
-    <button id="CreatePost" type="submit" class="btn btn-primary">Submit</button>
+    <button id="CreatePost" type="button" class="btn btn-primary">Submit</button>
 </form>

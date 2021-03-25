@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div id="root" class="container" style="margin-top:80px !important">
         </div>
@@ -21,6 +20,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+    //Empty Table Template
     var EmptyTable = "<button id='btnGetCreateForm' type='button' class='btn btn-primary'>Create Post</button>"+
     "<table class='table' style='margin-top:10px !important'>"+
     "<thead>"+
@@ -94,6 +94,13 @@
                 console.log("error: " + error)
             }
         })
+    })
+
+    //Create Post
+    $(document).on('click', '#CreatePost', function(){
+        var title = $('#Title').val();
+        var body = $('#Body').val();
+        
     })
 </script>
 
