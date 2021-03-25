@@ -21,18 +21,18 @@
 
 <script>
     //Empty Table Template
-    var EmptyTable = "<button id='btnGetCreateForm' type='button' class='btn btn-primary'>Create Post</button>"+
-    "<table class='table' style='margin-top:10px !important'>"+
-    "<thead>"+
-    "<tr>"+
-    "<th>SNo</th>"+
-    "<th>Title</th>"+
-    "<th>Body</th>"+
-    "</tr>"+
-    "</thead>"+
-    "<tbody id='table-body'>"+
-    "</tbody>"+
-    "</table>";
+    var EmptyTable = "<button id='btnGetCreateForm' type='button' class='btn btn-primary'>Create Post</button>" +
+        "<table class='table' style='margin-top:10px !important'>" +
+        "<thead>" +
+        "<tr>" +
+        "<th>SNo</th>" +
+        "<th>Title</th>" +
+        "<th>Body</th>" +
+        "</tr>" +
+        "</thead>" +
+        "<tbody id='table-body'>" +
+        "</tbody>" +
+        "</table>";
 
     //Get List
     $(document).ready(function() {
@@ -46,11 +46,11 @@
                 var posts = result['posts'];
                 var Sno = 1;
                 posts.forEach(value => {
-                    var RowTemplate = "<tr><td>"+Sno+"</td><td>"+value['title']+"</td><td>"+value['body']+"</td></tr>";
+                    var RowTemplate = "<tr><td>" + Sno + "</td><td>" + value['title'] + "</td><td>" + value['body'] + "</td></tr>";
                     $('#table-body').append(RowTemplate)
                     Sno++;
                 });
-                
+
             },
             error: function(error) {
                 console.log("error: " + error)
@@ -59,21 +59,21 @@
     })
 
     //Show Add Form
-    $(document).on('click', '#btnGetCreateForm', function(){
+    $(document).on('click', '#btnGetCreateForm', function() {
         $.ajax({
             type: "GET",
             url: "CreatePost.php",
-            success: function(response){
+            success: function(response) {
                 $('#root').html(response);
             },
-            error: function(error){
+            error: function(error) {
                 console.log("error: " + error)
             }
         })
     })
 
     //Show Table
-    $(document).on('click', '#btnBack', function(){
+    $(document).on('click', '#btnBack', function() {
         $('#root').html(EmptyTable);
         $.ajax({
             type: "GET",
@@ -84,11 +84,11 @@
                 var posts = result['posts'];
                 var Sno = 1;
                 posts.forEach(value => {
-                    var RowTemplate = "<tr><td>"+Sno+"</td><td>"+value['title']+"</td><td>"+value['body']+"</td></tr>";
+                    var RowTemplate = "<tr><td>" + Sno + "</td><td>" + value['title'] + "</td><td>" + value['body'] + "</td></tr>";
                     $('#table-body').append(RowTemplate)
                     Sno++;
                 });
-                
+
             },
             error: function(error) {
                 console.log("error: " + error)
@@ -97,10 +97,30 @@
     })
 
     //Create Post
-    $(document).on('click', '#CreatePost', function(){
+    $(document).on('click', '#CreatePost', function() {
         var title = $('#Title').val();
         var body = $('#Body').val();
-        
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/post",
+            dataType: "json",
+            data: {
+                title: title,
+                body: body
+            },
+            success: function(response) {
+                console.log(response)
+            },
+            // error: function(error) {
+            //     console.log("error: " + error)
+            // }
+        }).fail(function(response) {
+            var data = response.responseJSON;
+            var result = JSON.parse(data);
+            
+            console.log(data);
+        });
     })
 </script>
 
